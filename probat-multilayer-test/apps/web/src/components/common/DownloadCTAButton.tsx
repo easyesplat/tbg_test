@@ -1,7 +1,15 @@
+"use client";
+
+import React from "react";
+import { withExperiment } from "../../../probat/runtime";
+import { PROBAT_COMPONENTS, PROBAT_REGISTRIES } from "../../../probat/index";
+
 import { DownloadIcon } from 'lucide-react';
 import Link from 'next/link';
 
-export default function DownloadCTAButton() {
+const __PROBAT_KEY__ = "probat-multilayer-test/apps/web/src/components/common/DownloadCTAButton.tsx";
+
+const DownloadCTAButton = () => {
   return (
     <Link
       href="/download"
@@ -16,3 +24,12 @@ export default function DownloadCTAButton() {
     </Link>
   );
 }
+
+// Probat Generate Lines.
+export default (() => {
+  const meta = PROBAT_COMPONENTS[__PROBAT_KEY__];
+  const reg  = PROBAT_REGISTRIES[__PROBAT_KEY__] as Record<string, React.ComponentType<any>> | undefined;
+  return (meta?.proposalId && reg)
+    ? withExperiment<any>(DownloadCTAButton as any, { proposalId: meta.proposalId, registry: reg })
+    : DownloadCTAButton;
+})();
