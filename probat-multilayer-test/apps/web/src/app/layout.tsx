@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ProbatProviderClient } from "@probat/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ProbatProviderClient 
+          apiBaseUrl="https://gushi.onrender.com"
+          clientKey="" 
+          environment="prod"
+          repoFullName="easyesplat/tbg_test"
+        >
+          {children}
+        </ProbatProviderClient>
       </body>
     </html>
   );
